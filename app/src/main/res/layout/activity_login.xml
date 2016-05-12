@@ -7,6 +7,14 @@
     android:background="@drawable/process_bkg"
     tools:context="byteshaft.com.videocompressor.LoginActivity">
 
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:src="@drawable/back_button"/>
+
     <ImageView
         android:id="@+id/logo_image"
         android:layout_width="150dp"
