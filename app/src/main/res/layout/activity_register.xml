@@ -53,14 +53,25 @@
 
 
         <EditText
-            android:id="@+id/user_name"
+            android:id="@+id/first_name"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="10dip"
-            android:hint="Name"
+            android:hint="First name"
             android:background="@drawable/et_bg"
             android:layout_below="@+id/tv_ques" />
+
+
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="10dip"
+            android:hint="Last name"
+            android:background="@drawable/et_bg"
+            android:layout_below="@+id/first_name" />
 
         <EditText
             android:id="@+id/email_et"
@@ -70,7 +81,7 @@
             android:padding="10dip"
             android:hint="Email"
             android:background="@drawable/et_bg"
-            android:layout_below="@+id/user_name" />
+            android:layout_below="@+id/last_name" />
 
         <EditText
             android:id="@+id/password_et"
