@@ -1,6 +1,7 @@
 package byteshaft.com.videocompressor;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.back_button:
                 System.out.println("back button clicked");
+                startActivity(new Intent(LoginActivity.this, WelcomActivity.class));
                 break;
             case R.id.button_login:
                 System.out.println("login button clicked");
