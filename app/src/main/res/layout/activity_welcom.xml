@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/process_bkg"
-    tools:context="byteshaft.com.videocompressor.WelcomActivity">
+    tools:context=".WelcomeActivity">
 
     <ImageView
         android:id="@+id/logo_image"
@@ -15,6 +15,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp" />
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo_image"
+        android:layout_centerInParent="true" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,18 +29,6 @@
         android:layout_marginTop="25dp"
         android:layout_below="@+id/logo_image">
 
-
-        <Button
-            android:id="@+id/facebook_button"
-            android:layout_width="250dp"
-            android:background="@drawable/button_bg"
-            android:padding="10dip"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/password_et"
-            android:text="Facebook login" />
 
         <Button
             android:id="@+id/button_login"
@@ -44,7 +39,6 @@
             android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/facebook_button"
             android:text="Login" />
 
         <TextView

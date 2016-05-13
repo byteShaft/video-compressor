@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.back_button:
                 System.out.println("back Button");
-                startActivity(new Intent(RegisterActivity.this, WelcomActivity.class));
+                startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
                 break;
             case R.id.button_sign_up:
                 validate();

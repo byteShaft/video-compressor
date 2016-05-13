@@ -34,7 +34,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.back_button:
                 System.out.println("back button clicked");
-                startActivity(new Intent(LoginActivity.this, WelcomActivity.class));
+                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
                 break;
             case R.id.button_login:
                 System.out.println("login button clicked");
