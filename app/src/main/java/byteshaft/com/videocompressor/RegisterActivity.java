@@ -8,8 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -51,33 +56,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mEmail = mEmailEntry.getText().toString();
         mPassword = mPasswordEntry.getText().toString();
 
-//        if (mFirstName.trim().isEmpty() || mFirstName.length() < 3) {
-//            mFirstNameEntry.setError("at least 3 characters");
-//            valid = false;
-//        } else {
-//            mFirstNameEntry.setError(null);
-//        }
-//
-//        if (mLastName.trim().isEmpty() || mLastName.length() < 3) {
-//            mLastNameEntry.setError("at least 3 characters");
-//            valid = false;
-//        } else {
-//            mLastNameEntry.setError(null);
-//        }
-//
-//        if (mEmail.trim().isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
-//            mEmailEntry.setError("enter a valid email address");
-//            valid = false;
-//        } else {
-//            mEmailEntry.setError(null);
-//        }
-//
-//        if (mPassword.isEmpty() || mPassword.length() < 4 || mPassword.length() > 10) {
-//            mPasswordEntry.setError("between 4 and 10 alphanumeric characters");
-//            valid = false;
-//        } else {
-//            mPasswordEntry.setError(null);
-//        }
+        if (mFirstName.trim().isEmpty() || mFirstName.length() < 3) {
+            mFirstNameEntry.setError("at least 3 characters");
+            valid = false;
+        } else {
+            mFirstNameEntry.setError(null);
+        }
+
+        if (mLastName.trim().isEmpty() || mLastName.length() < 3) {
+            mLastNameEntry.setError("at least 3 characters");
+            valid = false;
+        } else {
+            mLastNameEntry.setError(null);
+        }
+
+        if (mEmail.trim().isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
+            mEmailEntry.setError("enter a valid email address");
+            valid = false;
+        } else {
+            mEmailEntry.setError(null);
+        }
+
+        if (mPassword.isEmpty() || mPassword.length() < 4 || mPassword.length() > 10) {
+            mPasswordEntry.setError("between 4 and 10 alphanumeric characters");
+            valid = false;
+        } else {
+            mPasswordEntry.setError(null);
+        }
 
         return valid;
     }
@@ -92,7 +97,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.button_sign_up:
                 validate();
                 System.out.println("Sign Up Button");
-                new SingupTask(mFirstName, mLastName, mEmail, mPassword).execute();
+                if (!validate()) {
+                    Toast.makeText(getApplicationContext(), "Incorrect Entry", Toast.LENGTH_SHORT).show();
+                } else {
+                    new SingupTask(mFirstName, mLastName, mEmail, mPassword).execute();
+                }
                 break;
         }
     }
@@ -126,8 +135,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 HttpURLConnection connection = WebServiceHelper.openConnectionForUrl(data, "POST");
                 System.out.println(data);
                 String output = WebServiceHelper.readResponseData(connection);
+
+                InputStream in = connection.getInputStream();
+                String response = WebServiceHelper.convertInputStreamToString(in);
+                JSONObject jsonObject = new JSONObject(response);
+                String result = jsonObject.getString("result");
+                if (result.equals("success")) {
+
+                    String public_user_id = jsonObject.getString("public_user_id");
+                    String userId = jsonObject.getString("user_id");
+                    String accoutnId = jsonObject.getString("account_id");
+                    String token = jsonObject.getString("session_token");
+                }
+
                 System.out.println(output);
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;
