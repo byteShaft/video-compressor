@@ -6,6 +6,15 @@
     android:background="@drawable/process_bkg"
     tools:context="byteshaft.com.videocompressor.RegisterActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
     <ImageButton
         android:id="@+id/back_button"
@@ -20,14 +29,14 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/logo_image">
 
@@ -106,4 +115,6 @@
             android:text="Sign up" />
 
     </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
