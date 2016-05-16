@@ -7,6 +7,15 @@
     android:background="@drawable/process_bkg"
     tools:context="byteshaft.com.videocompressor.LoginActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <ImageButton
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
@@ -20,8 +29,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp" />
 
     <RelativeLayout
@@ -84,5 +92,6 @@
             android:text="Login" />
 
     </RelativeLayout>
-
+    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
