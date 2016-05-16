@@ -22,7 +22,7 @@ public class WebServiceHelper {
             throws IOException {
         URL url = new URL(targetUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestProperty("Content-Type", "text/html");
+        connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("charset", "utf-8");
         connection.setRequestMethod(method);
         return connection;
@@ -61,6 +61,14 @@ public class WebServiceHelper {
                 String.format("password=\"%s\"", password);
     }
 
+    public static String getLoginString(
+            String email, String password) {
+
+        return AppGlobals.LOGIN_URL +
+                String.format("login_email=%s&", email) +
+                String.format("login_password=%s", password);
+    }
+
     public static void writeDataToStream(HttpURLConnection connection, String data) {
 
         try {
@@ -85,7 +93,7 @@ public class WebServiceHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-       return sb.toString();
+        return sb.toString();
     }
 
     public static void showProgressDialog(Activity context, String message) {
