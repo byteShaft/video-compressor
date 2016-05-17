@@ -1,22 +1,15 @@
 package byteshaft.com.videocompressor;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,11 +40,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_button:
-                System.out.println("back button clicked");
-                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                onBackPressed();
+//                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
                 break;
             case R.id.button_login:
-                System.out.println("login button clicked");
                 System.out.println(validate());
                 if (!validate()) {
                     Toast.makeText(getApplicationContext(), "invalid credentials",
@@ -110,7 +102,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try {
                 HttpURLConnection connection = WebServiceHelper.openConnectionForUrl(data, "POST");
                 String output = WebServiceHelper.readResponseData(connection);
-                Log.i("OK", output);
                 System.out.println(output);
             } catch (IOException e) {
                 e.printStackTrace();

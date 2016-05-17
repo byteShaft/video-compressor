@@ -50,13 +50,17 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onCancel() {
-                info.setText("Login attempt canceled.");
+                if (info != null) {
+                    info.setText("Login attempt canceled.");
+                }
 
             }
 
             @Override
             public void onError(FacebookException error) {
-                info.setText("Login attempt failed.");
+                if (info != null) {
+                    info.setText("Login attempt failed.");
+                }
 
             }
         });

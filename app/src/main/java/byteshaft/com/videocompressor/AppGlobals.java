@@ -11,6 +11,11 @@ public class AppGlobals extends Application {
     public static final String LOGIN_URL = String.format("%s%s", BASE_URL, "login&");
     public static final String KEY_USERNAME = "username ";
     public static final String KEY_PASSWORD = "password";
+    public static final String KEY_USER_LOGIN = "user_login";
+    public static final String KEY_USER_PUBLIC_ID = "user_public_id";
+    public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_USER_ACCOUNT_ID = "account_id";
+    public static final String KEY_USER_TOKEN = "token";
 
     @Override
     public void onCreate() {
