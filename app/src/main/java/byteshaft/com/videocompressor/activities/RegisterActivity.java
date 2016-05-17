@@ -1,4 +1,4 @@
-package byteshaft.com.videocompressor;
+package byteshaft.com.videocompressor.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import byteshaft.com.videocompressor.R;
 import byteshaft.com.videocompressor.utils.AppGlobals;
 import byteshaft.com.videocompressor.utils.Helpers;
 import byteshaft.com.videocompressor.utils.WebServiceHelper;
@@ -40,14 +41,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         mBackButton = (ImageButton) findViewById(R.id.back_button);
         mFirstNameEntry = (EditText) findViewById(R.id.first_name);
         mLastNameEntry = (EditText) findViewById(R.id.last_name);
         mEmailEntry = (EditText) findViewById(R.id.email_et);
         mPasswordEntry = (EditText) findViewById(R.id.password_et);
         mSignUpButton = (Button) findViewById(R.id.button_sign_up);
-
         mBackButton.setOnClickListener(this);
         mSignUpButton.setOnClickListener(this);
 

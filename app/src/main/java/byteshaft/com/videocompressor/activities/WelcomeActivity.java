@@ -1,4 +1,4 @@
-package byteshaft.com.videocompressor;
+package byteshaft.com.videocompressor.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import byteshaft.com.videocompressor.R;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 

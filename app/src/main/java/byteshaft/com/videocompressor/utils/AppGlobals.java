@@ -16,6 +16,7 @@ public class AppGlobals extends Application {
     public static final String KEY_USER_ID = "user_id";
     public static final String KEY_USER_ACCOUNT_ID = "account_id";
     public static final String KEY_USER_TOKEN = "token";
+    public static final String KEY_VIDEO_PATH = "video_path";
 
     @Override
     public void onCreate() {
