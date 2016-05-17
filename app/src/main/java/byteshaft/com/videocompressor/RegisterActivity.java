@@ -1,6 +1,5 @@
 package byteshaft.com.videocompressor;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -92,7 +91,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.back_button:
                 System.out.println("back Button");
-                startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
+                onBackPressed();
+//                startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
                 break;
             case R.id.button_sign_up:
                 validate();
@@ -100,23 +100,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (!validate()) {
                     Toast.makeText(getApplicationContext(), "Incorrect Entry", Toast.LENGTH_SHORT).show();
                 } else {
-                    new SingupTask(mFirstName, mLastName, mEmail, mPassword).execute();
+                    new SingUpTask(mFirstName, mLastName, mEmail, mPassword).execute();
                 }
                 break;
         }
     }
 
-    private class SingupTask extends AsyncTask<Void, Void, Void> {
+    private class SingUpTask extends AsyncTask<Void, Void, Void> {
 
         private String mFirstName;
         private String mLastName;
         private String mEmail;
         private String mPassword;
 
-        public SingupTask(String firstname, String lastname, String email, String password) {
+        public SingUpTask(String firstName, String lastName, String email, String password) {
             super();
-            mFirstName = firstname;
-            mLastName = lastname;
+            mFirstName = firstName;
+            mLastName = lastName;
             mEmail = email;
             mPassword = password;
         }
@@ -146,6 +146,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     String userId = jsonObject.getString("user_id");
                     String accoutnId = jsonObject.getString("account_id");
                     String token = jsonObject.getString("session_token");
+                    // saveing values
+                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_PUBLIC_ID, public_user_id);
+                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_ID, userId);
+                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_ACCOUNT_ID, accoutnId);
+                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_TOKEN, token);
+                    Helpers.saveUserLogin(true);
                 }
 
                 System.out.println(output);
