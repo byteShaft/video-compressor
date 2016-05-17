@@ -1,5 +1,6 @@
 package byteshaft.com.videocompressor;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -110,12 +111,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private class SingUpTask extends AsyncTask<Void, Void, Void> {
+    private class SingUpTask extends AsyncTask<Void, Void, String> {
 
         private String mFirstName;
         private String mLastName;
         private String mEmail;
         private String mPassword;
+        private boolean internetAvailable = false;
 
         public SingUpTask(String firstName, String lastName, String email, String password) {
             super();
@@ -132,45 +134,62 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            String data = WebServiceHelper.getRegistrationString(
-                    mFirstName, mLastName, mEmail, mPassword);
-            try {
-                HttpURLConnection connection = WebServiceHelper.openConnectionForUrl(data, "POST");
-                System.out.println(data);
-                String output = WebServiceHelper.readResponseData(connection);
-
-                InputStream in = connection.getInputStream();
-                String response = WebServiceHelper.convertInputStreamToString(in);
-                JSONObject jsonObject = new JSONObject(response);
-                String result = jsonObject.getString("result");
-                if (result.equals("success")) {
-
-                    String public_user_id = jsonObject.getString("public_user_id");
-                    String userId = jsonObject.getString("user_id");
-                    String accoutnId = jsonObject.getString("account_id");
-                    String token = jsonObject.getString("session_token");
-                    // saveing values
-                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_PUBLIC_ID, public_user_id);
-                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_ID, userId);
-                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_ACCOUNT_ID, accoutnId);
-                    Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_TOKEN, token);
-                    Helpers.saveUserLogin(true);
+        protected String doInBackground(Void... voids) {
+            String response = "";
+            if (WebServiceHelper.isNetworkAvailable() && WebServiceHelper.isInternetWorking()) {
+                internetAvailable = true;
+                String data = WebServiceHelper.getRegistrationString(
+                        mFirstName, mLastName, mEmail, mPassword);
+                try {
+                    HttpURLConnection connection = WebServiceHelper.openConnectionForUrl(data, "POST");
+                    System.out.println(data);
+                    InputStream in = connection.getInputStream();
+                    response = WebServiceHelper.convertInputStreamToString(in);
+                    JSONObject jsonObject = new JSONObject(response);
+                    String result = jsonObject.getString("result");
+                    if (result.equals("success")) {
+                        String public_user_id = jsonObject.getString("public_user_id");
+                        String userId = jsonObject.getString("user_id");
+                        String accoutnId = jsonObject.getString("account_id");
+                        String token = jsonObject.getString("session_token");
+                        // saveing values
+                        Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_PUBLIC_ID, public_user_id);
+                        Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_ID, userId);
+                        Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_ACCOUNT_ID, accoutnId);
+                        Helpers.saveDataToSharedPreferences(AppGlobals.KEY_USER_TOKEN, token);
+                        Helpers.saveUserLogin(true);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-                System.out.println(output);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-            return null;
+            return response;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String response) {
+            super.onPostExecute(response);
             WebServiceHelper.dismissProgressDialog();
+            if (!internetAvailable) {
+                Helpers.alertDialog(RegisterActivity.this, "Connection error",
+                        "Check your internet connection");
+                return;
+            }
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                if(jsonObject.getString("result").equals("fail")) {
+                    Helpers.alertDialog(RegisterActivity.this, "Error", jsonObject.getString("message"));
+                    return;
+                } else if (jsonObject.getString("result").equals("success")) {
+                    startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+                    finish();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
