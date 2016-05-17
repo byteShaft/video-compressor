@@ -1,4 +1,4 @@
-package byteshaft.com.videocompressor;
+package byteshaft.com.videocompressor.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import byteshaft.com.videocompressor.R;
 import byteshaft.com.videocompressor.utils.AppGlobals;
 import byteshaft.com.videocompressor.utils.Helpers;
 import byteshaft.com.videocompressor.utils.WebServiceHelper;
