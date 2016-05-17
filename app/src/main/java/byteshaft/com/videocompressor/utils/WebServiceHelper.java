@@ -1,4 +1,4 @@
-package byteshaft.com.videocompressor;
+package byteshaft.com.videocompressor.utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
