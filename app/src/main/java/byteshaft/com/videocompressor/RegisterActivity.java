@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -146,6 +147,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     InputStream in = connection.getInputStream();
                     response = WebServiceHelper.convertInputStreamToString(in);
                     JSONObject jsonObject = new JSONObject(response);
+                    Log.i("TAG", String.valueOf(jsonObject));
                     String result = jsonObject.getString("result");
                     if (result.equals("success")) {
                         String public_user_id = jsonObject.getString("public_user_id");
@@ -183,8 +185,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Helpers.alertDialog(RegisterActivity.this, "Error", jsonObject.getString("message"));
                     return;
                 } else if (jsonObject.getString("result").equals("success")) {
-                    startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
                     finish();
+                    startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
