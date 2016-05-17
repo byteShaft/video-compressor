@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import byteshaft.com.videocompressor.utils.AppGlobals;
+import byteshaft.com.videocompressor.utils.Helpers;
+import byteshaft.com.videocompressor.utils.WebServiceHelper;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton mBackButton;
