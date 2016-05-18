@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.back_button:
                 onBackPressed();
-//                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
                 break;
             case R.id.button_login:
                 System.out.println(validate());

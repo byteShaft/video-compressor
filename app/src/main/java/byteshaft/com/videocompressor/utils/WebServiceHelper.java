@@ -21,6 +21,7 @@ public class WebServiceHelper {
     public static HttpURLConnection openConnectionForUrl(String targetUrl, String method)
             throws IOException {
         URL url = new URL(targetUrl);
+        System.out.println(targetUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("charset", "utf-8");
