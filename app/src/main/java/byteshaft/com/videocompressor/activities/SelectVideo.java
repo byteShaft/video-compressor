@@ -23,6 +23,7 @@ import byteshaft.com.videocompressor.utils.Helpers;
 public class SelectVideo extends Activity implements View.OnClickListener {
 
     private Button selectVideo;
+    private Button hamburger;
     private final int PICK_VIDEO = 0;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
     private static String videoPath = "";
@@ -34,9 +35,13 @@ public class SelectVideo extends Activity implements View.OnClickListener {
             startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
         }
         setContentView(R.layout.layout_select_video);
+        hamburger = (Button) findViewById(R.id.hamburger);
         selectVideo = (Button) findViewById(R.id.select_video_button);
         selectVideo.setOnClickListener(this);
+        hamburger.setOnClickListener(this);
     }
+
+
 
     @Override
     protected void onPause() {
@@ -44,6 +49,12 @@ public class SelectVideo extends Activity implements View.OnClickListener {
         if (!Helpers.isUserLoggedIn()) {
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     @Override
@@ -59,6 +70,9 @@ public class SelectVideo extends Activity implements View.OnClickListener {
                 } else {
                     openPictures();
                 }
+                break;
+            case R.id.hamburger:
+                startActivity(new Intent(getApplicationContext(), LogoutActivity.class));
                 break;
         }
     }

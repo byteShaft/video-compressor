@@ -15,6 +15,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import byteshaft.com.videocompressor.R;
+import byteshaft.com.videocompressor.utils.Helpers;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,6 +67,14 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Helpers.isUserLoggedIn()) {
+            finish();
+        }
     }
 
     @Override

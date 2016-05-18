@@ -22,11 +22,11 @@
         android:id="@+id/logo_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:contentDescription=""
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:layout_below="@+id/hamburger"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="61dp" />
 
 
         <Button
@@ -38,8 +38,9 @@
             android:text="Select Video"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="143dp" />
 
 
 </RelativeLayout>
