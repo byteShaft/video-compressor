@@ -9,7 +9,7 @@ import android.support.v7.app.AlertDialog;
 
 public class Helpers {
 
-    private static SharedPreferences getPreferenceManager() {
+    public static SharedPreferences getPreferenceManager() {
         return PreferenceManager.getDefaultSharedPreferences(AppGlobals.getContext());
     }
 
