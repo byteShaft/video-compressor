@@ -140,8 +140,8 @@ public class SelectVideo extends Activity implements View.OnClickListener {
 //                }
 //            }
         } else {
-            Toast.makeText(SelectVideo.this, "You haven't picked Image",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(SelectVideo.this, "You haven't picked any video",
+                    Toast.LENGTH_SHORT).show();
         }
         Log.i("TAG", videoPath);
     }
